@@ -37,6 +37,9 @@
 {
     MPMediaPickerController *mediaPickerController = [MPMediaPickerController new];
     mediaPickerController.delegate = self;
+    // этот флаг не гарантирует нам что мы сможем получить ссылку на локальное аудио, в списке
+    // будут выведены также закэированные песни. Проверка ссылки на nil в методе делегата обязательна!
+    mediaPickerController.showsCloudItems = NO;
     [self presentViewController:mediaPickerController animated:YES completion:nil];
 }
 
@@ -92,6 +95,9 @@
 }
 
 #pragma mark - Edit video
+
+// это не окончательная реализация метода, он не умеет поворачивать опорный кадр нужной стороной, принцип
+// как именно формируется кадр думаю вполне ясен.
 
 - (UIImage *)getSnapshotForVideo:(NSURL *)videoUrl
 {
